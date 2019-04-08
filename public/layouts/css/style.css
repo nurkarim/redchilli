@@ -1,0 +1,125 @@
+body{background: #000;}
+.container-fluid{padding-right: 0px; padding-left: 0px;}
+
+.main-nav {
+    padding:10px 0px 10px 0px;
+    background-color: rgba(34, 34, 34, 0.92);
+    box-shadow: 0px 0px 10px #000;
+}
+.main-nav p{color:red; padding: 0px 0px 0px 120px;}
+.main-nav a{color:red;}
+.main-nav img{height: 50px;}
+.navbar-expand-md{flex-flow: row wrap;}
+.navbar-dark .navbar-nav .nav-link {color:red; font-weight: 600; font-size: 18px; transition: all 0.5s;}
+.navbar-dark .navbar-nav .nav-link:hover {color:#ff9393;}
+.navbar-dark .navbar-nav .nav-link:active {color:#fff;}
+.case{border: 1px solid gray; border-radius: 2px; transition: all 0.5s;}
+.case:hover{background:gray; color:#000;}
+
+#intro{min-height: 600px; z-index: 2; }
+.intro-content{padding:130px 0px 0px 0px; z-index: 1;}
+.intro-content h1{color: #fff; text-shadow: 0px 0px 5px red;}
+.intro-content h2{color: #fff; text-shadow: 0px 0px 5px red;}
+.intro-content i{ font-size: 35px;     border-radius: 100%; color: #fff; box-shadow: 0 0 0 4px rgba(45, 126, 216, 0.2); margin:10px 15px; padding: 20px;     line-height: 30px; }
+.tooltip-inner{font-size: 20px;}
+#intro button{margin:20px 0px 20px 0px;}
+
+.coupon{  color: #fff; font-size: 22px; font-weight: 600; padding: 10px; text-shadow: 0px 0px 5px red;}
+
+#order{}
+.order-area{ z-index: 99;  border:1px solid #e4e4e4; margin-top: -100px; background: #f9f9f9; border-radius: 10px; padding: 15px;}
+.order-area h4{font-weight: 800; }
+.card-header{font-weight: 600;}
+.card-title{color:#8e0909; padding: 5px 0px 0px 0px;}
+.categories a{color:#8e0909; font-weight: 600; transition: all .2s; }
+.categories li{margin:6px 0px 6px 0px; border-bottom: 1px dashed gray; padding: 5px 0px 5px 0px; }
+.categories a:hover{color:#dc3545; }
+.item{margin-top:10px; border-bottom: 1px solid #ebedf3; padding: 5px 0px 10px 0px;}
+.item img{border-radius: 2px;}
+.item-title{font-weight: 800; font-size: 15px; padding-left:6px;}
+.item-desc{padding-left:6px;}
+.cart-action i{color:#ac1f1f;  margin:0px 0px 0px 10px;}
+
+#checkout{}
+.checkout-area{ z-index: 99;  border:1px solid #e4e4e4; margin-top: 120px; background: #f9f9f9; border-radius: 10px; padding: 15px;}
+
+.cartitem{border-bottom: 1px solid #292a2b; padding: 2px 0px 5px 0px;}
+.cartitem-title{padding: 0px 5px 0px 5px;}
+.cart-text{font-size: 12px;}
+.cart-action{padding: 0px;}
+.cart-action p{}
+.order-footer{padding:10px 0px 0px 0px;}
+.order-details{padding: 10px 0px 10px 0px; border-bottom: 1px solid #292a2b;}
+.ordertotal{padding: 10px 0px 10px 0px; border-bottom: 1px solid #292a2b; background: #4e4e4f;}
+
+#about{min-height: 450px;  background: #fff; padding: 60px 0px 40px 0px; margin: 60px 0px 0px 0px; font-size: 18px; }
+#about p{color:#dc3545;}
+
+
+#slider{background: #000;}
+
+#mainSlider {}
+
+.carousel-item > img {border-bottom: 15px solid #8470ff;}
+
+.carousel-caption h1{
+    display: inline-block;
+    font-size: 30px;
+    line-height: 1em;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #dc3545;
+    overflow-wrap: break-word;
+    width: 100%;
+    text-shadow:0px 0px 10px #000;
+}
+
+.awards{padding:30px;}
+.awards h2{color:#dc3545;}
+.awards p{color:#fff;}
+.award{padding:10px 0px 45px 20px;  margin:0px 0px 10px 0px; font-size: 22px; color:gold;}
+.award i{color:#dc3545; font-size: 32px;}
+
+.feedback{ padding: 10px; font-color:#fff;}
+.feedback h2{ color:#e4e4e4; font-size: 28px; }
+
+#offer{background: #1e1e1e; padding: 60px; }
+#offer h2{color: #B82E00; padding: 20px 0px 20px 0px;}
+.bg-offer{background: #ec9e08}
+.offer-header{color: #8F0000; font-weight: 800; font-size: 26px;}
+.offer-body h4{ color:#3b2e2e; font-size:  22px; }
+.card-titleo{font-size: 18px; color: #B80000;}
+.offer-footer{color: #8F0000; font-weight: 800; font-size: 26px;}
+.offer-book{font-weight: 600; color: #000; font-size: 18px;}
+
+#party{min-height: 350px;}
+#party h2{font-size: 40px; color:#fff; padding: 120px 0px 40px 0px; }
+
+#feedback{ padding: 40px 0px 40px 0px; }
+.party-body{ background-color:#fff; padding: 10px;  }
+.party-body h4{ color:#8F0000;  font-weight: 600; }
+.feedback-body{ background-color:#fff;  padding: 10px;}
+.feedback-body h4{ color:#8F0000; }
+
+#map{min-height: 450px; background: url(../img/map.jpg) fixed center / cover; z-index: 101; }
+/*.location{background-color:rgba(0,0,0,0.3); z-index: 102; min-height: 455px;}*/
+#footer{padding:60px 0px 60px 0px; background: #000}
+#footer h4{
+    color: #fff;
+    font-size: 18px;
+    padding-bottom: 11px;
+    }
+#footer a{color:#fff}
+#footer p{color:#fff}
+.socailm i {
+    border-radius: 9px;
+    background: #000;
+    color: #fff;
+    font-size: 19px;
+    padding: 10px;
+    transition: all 0.5s;
+}
+
+.socailm i:hover{background:gray; }
+.contact i{padding:5px; border-radius:8px;}
+#copyright{border-top: 2px solid #ffffff; color:#fff ; padding-top:20px; background: #101010;}
