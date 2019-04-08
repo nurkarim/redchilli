@@ -11,6 +11,17 @@
       new WOW().init();
     </script>
 
+ 
+
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip() 
+    });
+  </script>
+<script src="{{ url('public') }}/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
+@yield('js')
+
   <script type="text/javascript">
       $('a').click(function(){
         $('html, body').animate({
@@ -18,14 +29,6 @@
         }, 500);
         return false;
       });
-  </script> 
-
-  <script>
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip() 
-    });
   </script>
-@yield('js')
-
 @include('admin._partials.modal')
   

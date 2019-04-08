@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url('public/layouts') }}/css/animate.css">
     <link href="{{ url('public/layouts') }}/css/style.css" rel="stylesheet">
     <link href="{{ url('public/layouts') }}/css/responsive.css" rel="stylesheet">
+      <link href="{{ url('public') }}/css/toastr.min.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
     	.categoryDescription {
 
@@ -12,4 +13,7 @@
    
     clear: left;
 }
+
+
     </style>
+

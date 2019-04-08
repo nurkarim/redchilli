@@ -45,7 +45,7 @@ function addCart() {
     var namea=$(this).val().split('_');
     nameSItem.push(namea[1]);
 });
-    
+
 addToCart('{{$product->id}}','{{$product->name}}','{{$product->price}}','{{$product->foodMenu->name}}',nameSItem);
 }
 </script>

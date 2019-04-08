@@ -54,7 +54,20 @@
 
                             <!-- item -->
                           <div class="shop_cart">
-                           
+                           @if(Cart::count()>0)
+                           @foreach(Cart::content() as $cartProduct) 
+                            <div class="row cartitem" id="cart_id_{{ $cartProduct->id }}">
+                                <div class="col-sm-8 cartitem-title"> <input type="hidden" id="pid_{{ $cartProduct->id }}" value="{{ $cartProduct->id }}">
+                                    <p class="cart-text"><b id="pdt_cart_{{ $cartProduct->id }}">@if($cartProduct->qty==1) @else {{ $cartProduct->qty }}x @endif</b> {{ $cartProduct->name }}</p>
+                                    <span class="cart-text">{{ $cartProduct->options->subItem }}</span>
+                                    <input type="hidden" value="{{ $cartProduct->qty }}" id="qty_{{ $cartProduct->id }}">
+                                </div>
+                                <div class="col-sm-4 cart-action"> <input type="hidden" value="{{ $cartProduct->price }}" class="subAmt amt" id="cart_price{{ $cartProduct->id }}">
+                                    <p>£<span id="cart_price_{{ $cartProduct->id }}">{{ number_format($cartProduct->price,2) }}</span> <a href="javascript:void()" onclick="deleteCart('{{ $cartProduct->id }}')"><i class="fa fa-times"></i></a></p> 
+                                </div>
+                            </div>
+                           @endforeach
+                           @endif
                           </div>
                             <!-- item-end -->
 
@@ -84,7 +97,7 @@
 
                             <div class="row">
                                 <div class="col-md-12 order-footer">
-                                    <a href="checkout.html"><button class="btn btn-danger btn-sm btn-block">Place Order</button></a>
+                                    <a href="{{route('checkouts.show')}}"><button class="btn btn-danger btn-sm btn-block">Place Order</button></a>
                                 </div>
                             </div>
                           </div>

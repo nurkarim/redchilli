@@ -32,13 +32,13 @@
                 <a class="dropdown-item  active " href="index.html">Image</a>
               </div>
             </li> -->
-            <li class="nav-item "><a href="{{url('/')}}#" class="nav-link">Home</a></li>
-            <li class="nav-item "><a href="{{url('/')}}#order" class="nav-link">Menu</a></li>
-            <li class="nav-item "><a href="{{url('/')}}#offer" class="nav-link">Offers</a></li>
-            <li class="nav-item "><a href="{{url('/')}}#about" class="nav-link">About</a></li>
-            <li class="nav-item "><a href="{{url('/')}}#slider" class="nav-link">Gallery</a></li>
-            <li class="nav-item "><a href="{{url('/')}}#footer" class="nav-link">Contact</a></li>
-           <li class="nav-item "><a href="{{url('/')}}#ordernow" class="nav-link case">Order Now</a></li>
+            <li class="nav-item "><a href="/" class="nav-link">Home</a></li>
+            <li class="nav-item "><a href="#order" class="nav-link">Menu</a></li>
+            <li class="nav-item "><a href="#offer" class="nav-link">Offers</a></li>
+            <li class="nav-item "><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-item "><a href="#slider" class="nav-link">Gallery</a></li>
+            <li class="nav-item "><a href="#footer" class="nav-link">Contact</a></li>
+           <li class="nav-item "><a href="#ordernow" class="nav-link case">Order Now</a></li>
             
           </ul>
         </div>
@@ -46,10 +46,8 @@
         </div> <!--/container -->
       </nav>
   </header>  
-
-            @yield('content')
-
-
+    {{-- @include('errors.ajaxMsg') --}}
+    @yield('content')
    <section id="footer" >
       <div class="container">
         <div class="row">

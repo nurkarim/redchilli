@@ -174,9 +174,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        // Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
     ],
 
     /*
@@ -225,9 +226,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+        // 'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
 
     ],
 
