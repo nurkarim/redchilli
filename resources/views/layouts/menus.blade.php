@@ -30,7 +30,26 @@
                             @endforeach
                             @endif
                             @endforeach
+                            @else
+                               @foreach($value->items as $catItem)
+                                  <div class="row item">
+
+                                <div class="col-sm-8">
+                                    <p class="item-title" style="padding: 0px!important;">{{ $catItem->name }}</p>
+                                    <p class="item-desc" style="padding: 0px!important;">{{ $catItem->details }}</p>
+                                </div>
+                                <div class="col-sm-4 cart-action">
+                                    <p>£{{ $catItem->price }} 
+                                     
+                                      <a href="javascript:void(0)"  onclick="addToCart('{{ $catItem->id }}','{{ $catItem->name }}','{{ $catItem->price }}','','')"><i class="fa fa-plus"></i></a>
+
+                                    </p> 
+                                </div>
+                            </div>
+                               @endforeach
+
                             @endif
+
                             <!-- menu item-end -->
 
                             

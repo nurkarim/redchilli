@@ -20,6 +20,9 @@ $rname = Route::currentRouteName();
 					<li class="submenu">
                         <a href="{{ route('products.index') }}" class="@if($rname=='products.index') active @endif"><i class="fa fa-fw fa-image"></i><span> Items </span> </a>
                     </li>
+                    <li class="submenu">
+                        <a href="{{ route('discounts.index') }}" class="@if($rname=='discounts.index') active @endif"><i class="fa fa-fw fa-code"></i><span> Discounts </span> </a>
+                    </li>
 					<li class="submenu">
                         <a href="#" class="@if($rname=='orders.index' || $rname=='orders.pending' || $rname=='orders.cancel') active @endif"><i class="fa fa-fw fa-table"></i> <span> Orders </span> <span class="menu-arrow"></span></a>
 							<ul class="list-unstyled">

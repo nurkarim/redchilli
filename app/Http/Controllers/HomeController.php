@@ -12,6 +12,7 @@ use App\FoodMenu;
 use App\MenusItem;
 use App\Order;
 use App\OrderCart;
+use App\Discount;
 use DB;
 use Cart;
 use Toastr;
@@ -38,10 +39,14 @@ class HomeController extends Controller
 
     public function addTocart(Request $request)
     {
-        
+        if (empty($request->item)) {
+           $name=$request->name;
+        }else{
+            $name=$request->item.','.$request->name;
+        }
     	$cart=Cart::add([
             'id'      => $request->pdt, 
-            'name'    => $request->item.','.$request->name,
+            'name'    => $name,
             'qty'      => $request->qty, 
             'price'   => $request->price, 
             'options' => ['subItem'=>$request->subitem], 
@@ -103,6 +108,7 @@ class HomeController extends Controller
     {
 
 
+
         try {
              DB::beginTransaction();
          Validator::make($request->all(), [
@@ -111,10 +117,32 @@ class HomeController extends Controller
         if (Cart::count() < 0) {
            return $request->session()->flash('error', 'Sorry!Items not found.');
         }
-        $subtotal=Cart::subtotal();
-        $grandTotal=2+$subtotal;
+        $subtotal=0;
+        foreach(Cart::content() as $row) {
+            $subtotal+=$row->price;
+        }
+
+
+        $discount=0;
+        if (!empty(Session::get('coupon_code'))) {
+            $getDisCode=Discount::where('code',Session::get('coupon_code'))->first();
+            if ($getDisCode) {
+
+            if (date('Y-m-d') <= $getDisCode->end_date) {
+                if ($getDisCode->amount <= $subtotal) {
+                    $discount=(($subtotal*$getDisCode->percent)/100);
+                }
+            }
+
+            }
+        }
+            
+
+      
+        $subtotalWithDis=$subtotal-$discount;
+        $grandTotal=2+$subtotalWithDis;
         $stripFee=2.9;
-    
+
         if ($request->payment_type==1) {
             $order=Order::create([
                         'date'=>date('Y-m-d'),
@@ -126,8 +154,9 @@ class HomeController extends Controller
                         'note'=>Session::get('notes'),
                         'discount_code'=>Session::get('coupon_code'),
                         'total_product'=>Cart::count(),
-                        'sub_total'=>Cart::subtotal(),
+                        'sub_total'=>$subtotal,
                         'tax'=>2,
+                        'discount'=>$discount,
                         'stripe_fee'=>0,
                         'total'=>$grandTotal,
                         'pay_type'=>$request->payment_type,
@@ -141,7 +170,7 @@ class HomeController extends Controller
                             'price'=>$row->price,
                             'qty'=>$row->qty,
                             'sub_items'=>$row->options->subItem,
-                            'total'=>($row->price*$row->qty),
+                            'total'=>$row->price,
                         ]);
                      }
                 Cart::destroy();
@@ -198,8 +227,9 @@ class HomeController extends Controller
                         'note'=>Session::get('notes'),
                         'discount_code'=>Session::get('coupon_code'),
                         'total_product'=>Cart::count(),
-                        'sub_total'=>Cart::subtotal(),
+                        'sub_total'=>$subtotal,
                         'tax'=>2,
+                        'discount'=>$discount,
                         'stripe_fee'=>$withFee,
                         'total'=>$grandTotal,
                         'pay_type'=>$request->payment_type,
@@ -213,7 +243,7 @@ class HomeController extends Controller
                             'price'=>$row->price,
                             'qty'=>$row->qty,
                             'sub_items'=>$row->options->subItem,
-                            'total'=>($row->price*$row->qty),
+                            'total'=>$row->price,
                         ]);
                      }
                       Cart::destroy();

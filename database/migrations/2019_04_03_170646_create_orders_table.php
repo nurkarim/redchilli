@@ -33,6 +33,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('tax',8,2)->default(0);
             $table->decimal('stripe_fee',8,2)->default(0);
             $table->decimal('total',8,2)->default(0);
+            $table->decimal('discount',8,2)->default(0);
             $table->integer('status')->default(0);
             $table->unsignedInteger('created_by') -> nullable() -> default(null);
             $table->unsignedInteger('updated_by') -> nullable() -> default(null);

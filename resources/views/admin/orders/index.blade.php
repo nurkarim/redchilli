@@ -28,12 +28,13 @@
 													<thead>
 														<tr style="height:15px!important;">
 															
-															<th>ID</th>
+															<th>ID No</th>
 															<th>Date</th>
 															<th>Delivery Times</th>
 															<th>Customer</th>
 															<th>Phone</th>
 															<th>Sub Total</th>
+															<th>Discount</th>
 															<th>Fee</th>
 															<th>Total</th>
 															
@@ -43,14 +44,16 @@
 														<?php $i=1; ?>
 														@foreach($orders as $order)
 														<tr>
-															<td>#{{ $order->id }}</td>
+															
+															<td><a href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
 															<td>{{ $order->date }}</td>
 															<td>{{ $order->delivery_times }}</td>
 															<td>{{ $order->customer_name }}</td>
 															<td>{{ $order->contact }}</td>
-															<td>{{ $order->sub_total }}</td>
-															<td>{{ $order->tax }}</td>
-															<td>{{ $order->total }}</td>
+															<td>£{{ $order->sub_total }}</td>
+															<td>£{{ $order->discount }}</td>
+															<td>£{{ $order->tax }}</td>
+															<td>£{{ $order->total }}</td>
 															
 														</tr>
 														@endforeach

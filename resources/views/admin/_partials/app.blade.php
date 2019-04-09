@@ -74,7 +74,8 @@
 															<th>Customer</th>
 															<th>Phone</th>
 															<th>Delivery Times</th>
-															<th>Amount</th>
+															<th>Sub Total</th>
+															<th>Discount</th>
 															<th>Fee</th>
 															<th>Total</th>
 															<th>Action</th>
@@ -92,6 +93,7 @@
 															<td>{{ $order->contact }}</td>
 															<td>{{ $order->delivery_times }}</td>
 															<td>£{{ $order->sub_total }}</td>
+															<td>£{{ $order->discount }}</td>
 															<td>£{{ $order->tax }}</td>
 															<td>£{{ $order->total }}</td>
 															<td><button type="button" class="btn btn-xs btn-danger">Action</button></td>

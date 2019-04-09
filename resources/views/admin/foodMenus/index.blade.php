@@ -43,8 +43,8 @@
 														<tr style="max-height: 10px!important">
 															<td>{{$i++}}</td>
 															<td>{{ $category->name }}</td>
-															<td>{{ $category->note }}</td>
-															<td><button class="btn btn-sm btn-danger">Delete</button> | <button data-toggle="modal" data-target="#modal" class="btn btn-primary btn-sm" onclick="loadModal('{{route('foodMenus.edit',$category->id)}}')">Edit</button></td>
+														
+															<td> <button data-toggle="modal" data-target="#modal" class="btn btn-primary btn-sm" onclick="loadModal('{{route('foodMenus.edit',$category->id)}}')">Edit</button></td>
 														</tr>
 														@endforeach
 														

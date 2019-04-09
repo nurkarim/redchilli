@@ -6,6 +6,8 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     Route::resource('products', 'ProductController');
     Route::resource('foodMenus', 'FoodMenuController');
     Route::resource('orders', 'OrderController');
+    Route::resource('discounts', 'DiscountController');
+    Route::post('discounts/delete', 'DiscountController@destroy')->name('discounts.destroy');
     Route::get('users/pending', 'OrderController@pendingOrder')->name('orders.pending');
     Route::get('users/cancel', 'OrderController@cancelOrder')->name('orders.cancel');
     Route::get('settings/app', 'SettingController@appSetting')->name('settings.app');
