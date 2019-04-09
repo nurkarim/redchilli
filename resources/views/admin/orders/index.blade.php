@@ -34,7 +34,7 @@
 															<th>Customer</th>
 															<th>Phone</th>
 															<th>Sub Total</th>
-															<th>Charge</th>
+															<th>Fee</th>
 															<th>Total</th>
 															
 														</tr>

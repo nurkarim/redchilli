@@ -10,6 +10,8 @@ use App\Category;
 use App\Product;
 use App\FoodMenu;
 use App\MenusItem;
+use App\Order;
+use App\OrderCart;
 use DB;
 use Cart;
 use Toastr;
@@ -100,15 +102,56 @@ class HomeController extends Controller
     public function confirmOrder(Request $request)
     {
 
-        if ($request->payment_type==1) {
-            # code...
-        }else{
-             Validator::make($request->all(), [
-                    'card_number' => 'required',
-                    'exp_date' => 'required',
-                    'exp_year' => 'required',
-                    'card_cvv' => 'required',
+
+        try {
+             DB::beginTransaction();
+         Validator::make($request->all(), [
+                    'payment_type' => 'required|numeric',
                 ]);
+        if (Cart::count() < 0) {
+           return $request->session()->flash('error', 'Sorry!Items not found.');
+        }
+        $subtotal=Cart::subtotal();
+        $grandTotal=2+$subtotal;
+        $stripFee=2.9;
+    
+        if ($request->payment_type==1) {
+            $order=Order::create([
+                        'date'=>date('Y-m-d'),
+                        'customer_name'=>Session::get('full_name'),
+                        'email'=>Session::get('email'),
+                        'contact'=>Session::get('phone'),
+                        'delivery_times'=>Session::get('delivery_times'),
+                        'delivery_address'=>Session::get('delivery_address'),
+                        'note'=>Session::get('notes'),
+                        'discount_code'=>Session::get('coupon_code'),
+                        'total_product'=>Cart::count(),
+                        'sub_total'=>Cart::subtotal(),
+                        'tax'=>2,
+                        'stripe_fee'=>0,
+                        'total'=>$grandTotal,
+                        'pay_type'=>$request->payment_type,
+        ]);
+            if ($order) {
+                  foreach(Cart::content() as $row) {
+                        OrderCart::create([
+                            'order_id'=>$order->id,
+                            'product_id'=>$row->id,
+                            'name'=>$row->name,
+                            'price'=>$row->price,
+                            'qty'=>$row->qty,
+                            'sub_items'=>$row->options->subItem,
+                            'total'=>($row->price*$row->qty),
+                        ]);
+                     }
+                Cart::destroy();
+            }
+        }else{
+
+                if (empty($request->card_number)||empty($request->exp_date)||empty($request->exp_year)||empty($request->card_cvv)) {
+                     Toastr::error('Fill up card form', 'Error', ["positionClass" => "toast-top-right"]);
+                     return back();
+                }
 
                 \Stripe\Stripe::setApiKey(env('STRIPE_KEY'));
                 //$stripe = Stripe::make(env('STRIPE_KEY'));
@@ -122,12 +165,12 @@ class HomeController extends Controller
                 ]);
 
                 if (!isset($token['id'])) {
-                    $request->session()->flash('error', "The Stripe Token was not generated correctly");
+                Toastr::error('The Stripe Token was not generated correctly', 'Error', ["positionClass" => "toast-top-right"]);
                     return back();
                 }
 
-                $withFee = ((234 * 2.9) / 100);
-                $totalCharge = 234 + $withFee;
+                $withFee = (($grandTotal * $stripFee) / 100);
+                $totalCharge = $grandTotal + $withFee;
                 $val = round($totalCharge * 100);
                 $total = intval($val);
                 $token = $token['id'];
@@ -137,10 +180,56 @@ class HomeController extends Controller
                         'description' => 'New Order charge',
                         'source' => $token,
                     ]);
+             
                 if ($charge['status'] == 'succeeded') {
 
+                    $order=Order::create([
+                        'date'=>date('Y-m-d'),
+                        'customer_name'=>Session::get('full_name'),
+                        'email'=>Session::get('email'),
+                        'contact'=>Session::get('phone'),
+                        'delivery_times'=>Session::get('delivery_times'),
+                        'delivery_address'=>Session::get('delivery_address'),
+                        'stripe_balance_transaction_id'=>$charge['balance_transaction'],
+                        'stripe_charge_id'=>$charge->id,
+                        'stripe_details'=>$charge['source'],
+                        'srtip_billing_details'=>$charge['billing_details'],
+                        'stripe_card'=>$request->card_number,
+                        'note'=>Session::get('notes'),
+                        'discount_code'=>Session::get('coupon_code'),
+                        'total_product'=>Cart::count(),
+                        'sub_total'=>Cart::subtotal(),
+                        'tax'=>2,
+                        'stripe_fee'=>$withFee,
+                        'total'=>$grandTotal,
+                        'pay_type'=>$request->payment_type,
+                    ]);
+                    if ($order) {
+                        foreach(Cart::content() as $row) {
+                        OrderCart::create([
+                            'order_id'=>$order->id,
+                            'product_id'=>$row->id,
+                            'name'=>$row->name,
+                            'price'=>$row->price,
+                            'qty'=>$row->qty,
+                            'sub_items'=>$row->options->subItem,
+                            'total'=>($row->price*$row->qty),
+                        ]);
+                     }
+                      Cart::destroy();
+                    }
                 }
             }
+            Session::put('coupon_code'," ");
+            DB::commit();
+            Toastr::success('New Order Successfully', 'Order Success', ["positionClass" => "toast-top-right"]);
+            return redirect('/');
+            
+            } catch (Exception $e) {
+              DB::rollback();
+             Toastr::error($e->getMessage(), 'Error', ["positionClass" => "toast-top-right"]);
+             return back(); 
+        }
     }
 
  

@@ -23,8 +23,8 @@
 											<div class="card-box noradius noborder bg-primary">
 													<i class="fa fa-file-text-o float-right text-white"></i>
 													<h6 class="text-white text-uppercase m-b-20">Active Orders</h6>
-													<h1 class="m-b-20 text-white counter">0</h1>
-													<span class="text-white">0 New Orders</span>
+													<h1 class="m-b-20 text-white counter">{{ $active }}</h1>
+													<span class="text-white">{{ $active }} Active Orders</span>
 											</div>
 									</div>
 
@@ -32,8 +32,8 @@
 											<div class="card-box noradius noborder bg-default">
 													<i class="fa fa-file-text-o float-right text-white"></i>
 													<h6 class="text-white text-uppercase m-b-20">Inactive Orders</h6>
-													<h1 class="m-b-20 text-white counter">0</h1>
-													<span class="text-white">0 New Orders</span>
+													<h1 class="m-b-20 text-white counter">{{ $inactive }} </h1>
+													<span class="text-white">{{ $inactive }}  Pending Orders</span>
 											</div>
 									</div>
 
@@ -41,8 +41,8 @@
 											<div class="card-box noradius noborder bg-danger">
 													<i class="fa fa-file-text-o float-right text-white"></i>
 													<h6 class="text-white text-uppercase m-b-20">Cancel Orders</h6>
-													<h1 class="m-b-20 text-white counter">0</h1>
-													<span class="text-white">0 New Orders</span>
+													<h1 class="m-b-20 text-white counter">{{ $cancelOrder }}</h1>
+													<span class="text-white">{{ $cancelOrder }} Cancel Orders</span>
 											</div>
 									</div>
 
@@ -50,8 +50,8 @@
 											<div class="card-box noradius noborder bg-success">
 													<i class="fa fa-bell-o float-right text-white"></i>
 													<h6 class="text-white text-uppercase m-b-20">Products</h6>
-													<h1 class="m-b-20 text-white counter">0</h1>
-													<span class="text-white">5 New Alerts</span>
+													<h1 class="m-b-20 text-white counter">{{ $products }}</h1>
+													<span class="text-white">{{ $products }} Total Products</span>
 											</div>
 									</div>
 							</div>
@@ -73,7 +73,7 @@
 															<th>Date</th>
 															<th>Customer</th>
 															<th>Phone</th>
-															<th>Total Item</th>
+															<th>Delivery Times</th>
 															<th>Amount</th>
 															<th>Fee</th>
 															<th>Total</th>
@@ -81,17 +81,22 @@
 														</tr>
 													</thead>													
 													<tbody>
+														<?php
+														$i=1;
+														?>
+														@foreach($orders as $order)
 														<tr>
-															<td>1</td>
-															<td>2019-04-04</td>
-															<td>System Architect</td>
-															<td>01820018772</td>
-															<td>61</td>
-															<td>£320</td>
-															<td>£10</td>
-															<td>£330</td>
-															<td><button class="btn btn-sm btn-danger">Action</button></td>
+															<td>{{ $i++ }}</td>
+															<td>{{ $order->date }}</td>
+															<td>{{ $order->customer_name }}</td>
+															<td>{{ $order->contact }}</td>
+															<td>{{ $order->delivery_times }}</td>
+															<td>£{{ $order->sub_total }}</td>
+															<td>£{{ $order->tax }}</td>
+															<td>£{{ $order->total }}</td>
+															<td><button type="button" class="btn btn-xs btn-danger">Action</button></td>
 														</tr>
+														@endforeach
 														
 													</tbody>
 												</table>

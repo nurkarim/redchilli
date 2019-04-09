@@ -18,6 +18,8 @@ class CreateOrderCartsTable extends Migration
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('product_id');
             $table->string('name');
+            $table->string('food_menus')->nullable();
+            $table->string('sub_items')->nullable();
             $table->decimal('price',8,2)->default(0);
             $table->integer('qty')->default(0);
             $table->decimal('total',8,2)->default(0);

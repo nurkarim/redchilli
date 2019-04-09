@@ -1,5 +1,16 @@
 @extends('layouts.app')
 @section('content')
+<?php
+
+$start = "17:00";
+$end = "23:00";
+
+$tStart = strtotime($start);
+$tEnd = strtotime($end);
+$tNow = $tStart;
+
+
+?>
 <section id="checkout">
 	<div class="container-fluid">
 		<div class="container">
@@ -41,9 +52,15 @@
 								<div class="dropdown">
 									<select class="form-control" name="delivery_times" required="">
 										<option selected="">Choose...</option>
-										<option value="12.00">12.00 AM</option>
-										<option value="13.00">13.00 PM</option>
-										<option value="14.00">14.00 PM</option>
+										<option value="As soon as possible">As soon as possible</option>
+										<?php
+										while($tNow <= $tEnd){
+										?>
+										<option value="{{ date("H:i A",$tNow) }}">{{ date("H:i A",$tNow) }}</option>
+										<?php
+										 $tNow = strtotime('+10 minutes',$tNow);
+										}
+										?>
 									</select>
 								
 								</div>

@@ -21,13 +21,17 @@ class CreateOrdersTable extends Migration
             $table->string('contact')->nullable();
             $table->string('delivery_times')->nullable();
             $table->text('delivery_address')->nullable();
-            $table->text('stripe_id')->nullable();
+            $table->text('stripe_balance_transaction_id')->nullable();
             $table->text('stripe_charge_id')->nullable();
             $table->text('stripe_details')->nullable();
             $table->text('stripe_card')->nullable();
+            $table->text('srtip_billing_details')->nullable();
+            $table->text('note')->nullable();
+            $table->text('discount_code')->nullable();
             $table->integer('total_product')->default(0);
             $table->decimal('sub_total',8,2)->default(0);
             $table->decimal('tax',8,2)->default(0);
+            $table->decimal('stripe_fee',8,2)->default(0);
             $table->decimal('total',8,2)->default(0);
             $table->integer('status')->default(0);
             $table->unsignedInteger('created_by') -> nullable() -> default(null);

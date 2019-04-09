@@ -1,7 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
+<link rel="stylesheet" href="{{ url('public/layouts') }}/css/bootstrap.min.css">
+<div class="container" style="margin-top: 50px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -70,4 +68,4 @@
         </div>
     </div>
 </div>
-@endsection
+

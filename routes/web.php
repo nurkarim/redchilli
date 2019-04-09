@@ -1,9 +1,7 @@
 <?php
 
-Route::group(['prefix' => 'admin'], function() {
-	 Route::get('/', function () {
-	    return view('admin._partials.app');
-	})->name('admin');
+Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
+	 Route::get('/', 'AdminController@index')->name('admin');
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
     Route::resource('foodMenus', 'FoodMenuController');
