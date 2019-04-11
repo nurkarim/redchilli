@@ -31,9 +31,9 @@
 									<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 											<div class="card-box noradius noborder bg-default">
 													<i class="fa fa-file-text-o float-right text-white"></i>
-													<h6 class="text-white text-uppercase m-b-20">Inactive Orders</h6>
+													<h6 class="text-white text-uppercase m-b-20">New Orders</h6>
 													<h1 class="m-b-20 text-white counter">{{ $inactive }} </h1>
-													<span class="text-white">{{ $inactive }}  Pending Orders</span>
+													<span class="text-white">{{ $inactive }}  New Orders</span>
 											</div>
 									</div>
 

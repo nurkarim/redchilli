@@ -9,4 +9,9 @@ class Order extends Model
 	use Userstamps;
    protected $guarded =['id'];
    protected $table ="orders";
+
+   public function carts()
+   {
+   	 return $this->hasMany(OrderCart::class,'order_id','id');
+   }
 }

@@ -27,7 +27,7 @@ $rname = Route::currentRouteName();
                         <a href="#" class="@if($rname=='orders.index' || $rname=='orders.pending' || $rname=='orders.cancel') active @endif"><i class="fa fa-fw fa-table"></i> <span> Orders </span> <span class="menu-arrow"></span></a>
 							<ul class="list-unstyled">
 								<li class="@if($rname=='orders.index') active @endif"><a href="{{ route('orders.index') }}">Active Orders</a></li>
-								<li class="@if($rname=='orders.pending') active @endif"><a href="{{ route('orders.pending') }}">Inactive Orders</a></li>
+								<li class="@if($rname=='orders.pending') active @endif"><a href="{{ route('orders.pending') }}">New Orders</a></li>
 								<li class="@if($rname=='orders.cancel') active @endif"><a href="{{ route('orders.cancel') }}">Cancel Orders</a></li>
 							</ul>
                     </li>

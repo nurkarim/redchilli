@@ -5,7 +5,7 @@
 									<div class="breadcrumb-holder">
 											<h1 class="main-title float-left">Dashboard</h1>
 											<ol class="breadcrumb float-right">
-												<li class="breadcrumb-item active">Order Pending</li>
+												<li class="breadcrumb-item active">Order New</li>
 											</ol>
 											<div class="clearfix"></div>
 									</div>
@@ -17,7 +17,7 @@
 								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">						
 										<div class="card mb-3">
 											<div class="card-header">
-												<h3><i class="fa fa-desktop"></i> Orders Pending List </h3>
+												<h3><i class="fa fa-desktop"></i> New Orders List </h3>
 								
 					
 											</div>
@@ -36,6 +36,7 @@
 															<th>Discount</th>
 															<th>Fee</th>
 															<th>Total</th>
+														
 															
 														</tr>
 													</thead>													
@@ -43,7 +44,7 @@
 														<?php $i=1; ?>
 														@foreach($orders as $order)
 														<tr>
-															<td><a href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
+															<td><a target="_balnk" href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
 															<td>{{ $order->date }}</td>
 															<td>{{ $order->delivery_times }}</td>
 															<td>{{ $order->customer_name }}</td>
@@ -52,7 +53,7 @@
 															<td>£{{ $order->discount }}</td>
 															<td>£{{ $order->tax }}</td>
 															<td>£{{ $order->total }}</td>
-															
+														
 														</tr>
 														@endforeach
 														
