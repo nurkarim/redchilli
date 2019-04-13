@@ -13,6 +13,11 @@
                     <label class="control-label">Name</label>
                     <input class="form-control" required name="name" type="text" />
                 </div>  
+
+                <div class="form-group">
+                    <label class="control-label">Note</label>
+                    <input class="form-control"  name="note" type="text" />
+                </div>  
              
             </div>
        

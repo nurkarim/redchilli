@@ -12,6 +12,11 @@
                 <div class="form-group animated-form filled">
                     <label class="control-label">Name</label>
                       {!! Form::text('name',null,['class'=>'form-control','required'=>'true']) !!}
+                </div>  
+
+            <div class="form-group animated-form filled">
+                    <label class="control-label">Note</label>
+                      {!! Form::text('note',null,['class'=>'form-control','required'=>'true']) !!}
                 </div>   
  
 

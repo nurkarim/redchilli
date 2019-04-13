@@ -30,6 +30,7 @@ class FoodMenuController extends Controller
     		 DB::beginTransaction();
     		  $save=new FoodMenu();
     		  $save->name=$request->name;
+              $save->note=$request->note;
     		  $save->save();
     		  DB::commit();
     	    $request->session()->flash('success', 'Add successfully.');
@@ -48,6 +49,7 @@ class FoodMenuController extends Controller
     		  DB::beginTransaction();
     		  $save=FoodMenu::find($id);
     		  $save->name=$request->name;
+              $save->note=$request->note;
     		  $save->save();
     		  DB::commit();
             $request->session()->flash('success', 'Update successfully.');

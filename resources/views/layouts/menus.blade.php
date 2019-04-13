@@ -8,13 +8,14 @@
                               @if(count($value->foodMenus)>0)
                               @foreach($value->foodMenus as $food_Menu)
                               <h4  style="font-weight: 500;font-size: 15px;padding-top: 5px;">{{ $food_Menu->foodMenu->name }}</h4>
+                              <span style="font-size: 13px">{{ $food_Menu->foodMenu->note }}</span>
                               @if(count($food_Menu->foodMenu->items) > 0)
                               @foreach($food_Menu->foodMenu->items as $item)
                             <div class="row item">
 
                                 <div class="col-sm-8">
                                     <p class="item-title" style="padding: 0px!important;">{{ $item->name }}</p>
-                                    <p class="item-desc" style="padding: 0px!important;margin-top: -7px;font-size: 12px">{{ $item->details }}</p>
+                                    <p class="item-desc" style="padding: 0px!important;margin-top: -7px;font-size: 13px">{{ $item->details }}</p>
                                 </div>
                                 <div class="col-sm-4 cart-action">
                                     <p>£{{ $item->price }} 
@@ -36,7 +37,7 @@
 
                                 <div class="col-sm-8">
                                     <p class="item-title" style="padding: 0px!important;">{{ $catItem->name }}</p>
-                                    <p class="item-desc" style="padding: 0px!important;margin-top: -7px;font-size: 12px">{{ $catItem->details }}</p>
+                                    <p class="item-desc" style="padding: 0px!important;margin-top: -7px;font-size: 13px">{{ $catItem->details }}</p>
                                 </div>
                                 <div class="col-sm-4 cart-action">
                                     <p>£{{ $catItem->price }} 
