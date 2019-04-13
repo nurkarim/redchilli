@@ -13,7 +13,7 @@
 .style3 {font-family: Georgia, "Times New Roman", Times, serif}
 .style5 {font-family: Georgia, "Times New Roman", Times, serif; font-weight: bold; }
 .style9 {font-family: Georgia, "Times New Roman", Times, serif; font-size: 14px; }
-.style11 {font-family: Georgia, "Times New Roman", Times, serif; font-size: 16px; }
+.style11 {font-family: Georgia, "Times New Roman", Times, serif; font-size: 13px; }
 -->
 </style>
 <?php
@@ -71,7 +71,7 @@ function ccMasking($number, $maskingCharacter = '*') {
       </tr>
       @foreach($order->carts as $cart)
       <tr>
-        <td height="25" align="right"><span class="style11">{{$cart->qty}} X {{ $cart->name }} @if($cart->sub_items!=null) <br> {{$cart->sub_items}}  @endif</span></td>
+        <td height="25" align="right"><span class="style11">{{$cart->qty}} x {{ $cart->name }} @if($cart->sub_items!=null) <br> {{$cart->sub_items}}  @endif</span></td>
         <td align="center"><span class="style11">{{$cart->total}}</span></td>
       </tr>
       @endforeach

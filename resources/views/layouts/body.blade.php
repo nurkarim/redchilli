@@ -8,7 +8,9 @@
                     <h1>Quality Indian food cooked by experienced chefs</h1>
                     <h2>Fully Licensed Indian Restaurant</h2>
                     <i class="fa fa-clock-o" style="background-color: rgba(30, 116, 222, 0.5);" data-toggle="tooltip" data-placement="top" title="From 5PM to 11PM"></i> <i class="fa fa-phone" style="background-color:rgba(233, 47, 43, 0.5);" data-toggle="tooltip" data-placement="top" title="01609 775552"></i> <i class="fa fa-map-marker" style="background-color: rgba(97, 218, 0, 0.5); padding: 20px 23px 20px 23px;" data-toggle="tooltip" data-placement="top" title="297 High Street Northallerton, North Yorkshire DL7 8DW"></i>
-          <p class="coupon">Use Coupon Code <span style="background-color: #FF4D4D">"pohelab"</span> to enjoy 14% discount on 14 April</p>
+                    @if(!empty($discount))
+          <p class="coupon">Use Coupon Code <span style="background-color: #FF4D4D">"{{ $discount->code }}"</span> to enjoy {{ $discount->percent }}% discount on {{ date("d F", strtotime($discount->end_date)) }}</p>
+          @endif
                 </div>
                 <a href="#ordernow" id="ordernow"><button class="btn btn-success">Order Now</button></a>
             </div>

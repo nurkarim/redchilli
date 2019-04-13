@@ -105,6 +105,16 @@
                                     <div class="col-sm-4">
                                         £<span id="sub_total">0</span>
                                     </div>
+        @if(!empty(Session::get('discount')))
+                                    <div class="col-sm-8">
+                                        Discount
+                                    </div>
+                                    <div class="col-sm-4">
+                                        £<span id="sub_total">{{ number_format(Session::get('discount'),2) }}</span>
+                                        <input type="hidden" id="discount" name="discount" value="{{ number_format(Session::get('discount'),2) }}">
+                                    </div>
+                                    @endif
+
                                     <div class="col-sm-8">
                                         Delivery fee
                                     </div>
@@ -118,7 +128,9 @@
                                         Total
                                     </div>
                                     <div class="col-sm-4">
-                                        £<span id="grand_total">0</span>
+                                        £<span id="grand_total"> 0 </span>
+                                        <input type="hidden" class="grandTotal" value="0">
+
                                     </div>
                                 </div>
 
@@ -169,9 +181,18 @@
             add += Number($(this).val());
         });
         $('#grand_total').html(add);
+        $('.grandTotal').val(add);
+        discount();
     }
     subTotal();
     grandTotal();
+
+    function discount() {
+        var disc=$("#discount").val();
+        var gtotal=$(".grandTotal").val();
+          $('#grand_total').html(Number(gtotal)-Number(disc));
+
+    }
 </script>
 
 @endsection @endsection

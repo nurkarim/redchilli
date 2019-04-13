@@ -27,7 +27,8 @@ class HomeController extends Controller
          //  $request->session()->forget('cart');
          // return $request->session()->get('cart');
         $categories=Category::get();
-        return view('layouts.body',compact('categories'));
+        $discount=Discount::where('end_date','>=',date('Y-m-d'))->latest()->first();
+        return view('layouts.body',compact('categories','discount'));
     }
 
     public function subItems($id)
@@ -95,7 +96,25 @@ class HomeController extends Controller
         Session::put('delivery_times',$request->delivery_times);
         Session::put('notes',$request->notes);
         Session::put('coupon_code',$request->coupon_code);
-         
+          $discount=0;
+           $subtotal=0;
+        foreach(Cart::content() as $row) {
+            $subtotal+=$row->price;
+        }
+        if (!empty($request->coupon_code)) {
+            $getDisCode=Discount::where('code',$request->coupon_code)->first();
+            if ($getDisCode) {
+
+            if (date('Y-m-d') <= $getDisCode->end_date) {
+                if ($getDisCode->amount <= $subtotal) {
+                    $discount=(($subtotal*$getDisCode->percent)/100);
+                   Session::put('discount',$discount);
+
+                }
+            }
+
+            }
+        }
         return redirect()->route('payments.show');
     }
 
@@ -251,6 +270,7 @@ class HomeController extends Controller
                 }
             }
             Session::put('coupon_code'," ");
+            Session::put('discount'," ");
             DB::commit();
             Toastr::success('New Order Successfully', 'Order Success', ["positionClass" => "toast-top-right"]);
             return redirect('/');
