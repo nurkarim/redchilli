@@ -45,7 +45,7 @@
 														@foreach($orders as $order)
 														<tr>
 															
-															<td><a href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
+															<td><a target="_blank" href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
 															<td>{{ $order->date }}</td>
 															<td>{{ $order->delivery_times }}</td>
 															<td>{{ $order->customer_name }}</td>

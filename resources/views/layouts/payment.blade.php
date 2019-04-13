@@ -105,7 +105,7 @@
                                     <div class="col-sm-4">
                                         £<span id="sub_total">0</span>
                                     </div>
-        @if(!empty(Session::get('discount')))
+        @if(Session::get('discount')!=" ")
                                     <div class="col-sm-8">
                                         Discount
                                     </div>
@@ -113,6 +113,8 @@
                                         £<span id="sub_total">{{ number_format(Session::get('discount'),2) }}</span>
                                         <input type="hidden" id="discount" name="discount" value="{{ number_format(Session::get('discount'),2) }}">
                                     </div>
+                                    @else
+                                    <input type="hidden" id="discount" name="discount" value="0">
                                     @endif
 
                                     <div class="col-sm-8">

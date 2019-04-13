@@ -70,6 +70,7 @@
 													<thead>
 														<tr>
 															<th>SL</th>
+															<th>Order No</th>
 															<th>Date</th>
 															<th>Customer</th>
 															<th>Phone</th>
@@ -78,7 +79,7 @@
 															<th>Discount</th>
 															<th>Fee</th>
 															<th>Total</th>
-															<th>Action</th>
+														
 														</tr>
 													</thead>													
 													<tbody>
@@ -88,6 +89,7 @@
 														@foreach($orders as $order)
 														<tr>
 															<td>{{ $i++ }}</td>
+														<td>	<a target="_blank" href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
 															<td>{{ $order->date }}</td>
 															<td>{{ $order->customer_name }}</td>
 															<td>{{ $order->contact }}</td>
@@ -96,7 +98,7 @@
 															<td>£{{ $order->discount }}</td>
 															<td>£{{ $order->tax }}</td>
 															<td>£{{ $order->total }}</td>
-															<td><button type="button" class="btn btn-xs btn-danger">Action</button></td>
+															
 														</tr>
 														@endforeach
 														

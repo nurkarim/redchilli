@@ -93,7 +93,7 @@ function ccMasking($number, $maskingCharacter = '*') {
     <td height="39" align="center"><span class="style5">The order has been paid</span></td>
   </tr>
   <tr>
-    <td height="31" align="center"><span class="style3">Card {{ ccMasking($order->stripe_card)}}</span></td>
+    <td height="31" align="center"><span class="style3">@if($order->pay_type==1) Cash on delivery @else Card {{ ccMasking($order->stripe_card)}}@endif</span></td>
   </tr>
   <tr>
     <td height="29" align="center"><span class="style3">www.redchillinorthallerton.co.uk</span></td>

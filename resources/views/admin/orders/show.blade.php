@@ -20,7 +20,7 @@
 							<div class="card mb-3">
 										<div class="card-header">
 											<h3><i class="fa fa-table"></i> Invoice Details 
-												<button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#modal" style="margin-left: 10px;" onclick="loadModal('{{route('orders.edit',$order->id)}}')"><i class="fa fa-edit"></i> Action</button>  <button type="button" class="btn btn-info btn-sm btn-danger pull-right" onclick="Popup('{{route('orders.print',$order->id)}}')"><i class="fa fa-print"></i> Print </button>
+												@if(!$order->status==2)<button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#modal" style="margin-left: 10px;" onclick="loadModal('{{route('orders.edit',$order->id)}}')"><i class="fa fa-edit"></i> Action</button>@endif  <button type="button" class="btn btn-info btn-sm btn-danger pull-right" onclick="Popup('{{route('orders.print',$order->id)}}')"><i class="fa fa-print"></i> Print </button>
 											</h3>
 										</div>
 											
@@ -60,7 +60,7 @@
 															<div class="col-md-6">
 																<h5>Payment Method:</h5>
 																<address>
-																	Visa {{ $order->stripe_card}}<br>
+																	 @if($order->pay_type==1) <span style="text-transform: uppercase;font-weight: bold;">Cash on delivery</span> @else Master Card {{ $order->stripe_card}} @endif<br>
 																	
 																	{{ $order->email}}
 																</address>

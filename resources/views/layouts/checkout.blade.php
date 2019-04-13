@@ -51,7 +51,7 @@ $tNow = $tStart;
 							    <label>Delivery Time<em style="color: red">*</em></label>
 								<div class="dropdown">
 									<select class="form-control" name="delivery_times" required="">
-										<option selected="">Choose...</option>
+										
 										<option value="As soon as possible">As soon as possible</option>
 										<?php
 										while($tNow <= $tEnd){

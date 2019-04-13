@@ -35,6 +35,7 @@
 															<th>Food Menus</th>
 															<th>Name</th>
 															<th>Price</th>
+															<th>Note</th>
 															<th>Action</th>
 														</tr>
 													</thead>													
@@ -47,6 +48,7 @@
 															<td>{{ @$product->foodMenu->name }}</td>
 															<td>{{ $product->name }}</td>
 															<td>£{{ $product->price }}</td>
+															<td>£{{ $product->details }}</td>
 															<td><a href="{{route('products.edit',$product->id)}}" class="btn btn-primary btn-xs" >Edit</a></td>
 														</tr>
 														@endforeach

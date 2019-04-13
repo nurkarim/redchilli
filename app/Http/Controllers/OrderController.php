@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\AppSetting;
 use DB;
+use Stripe\Stripe;
 class OrderController extends Controller
 {
     public function index()
@@ -22,7 +23,7 @@ class OrderController extends Controller
 
     public function cancelOrder()
     {
-    	$orders=Order::where('status',1)->get();
+    	$orders=Order::where('status',2)->get();
     	return view('admin.orders.cancelOrder',compact('orders'));
     }
 
@@ -53,6 +54,19 @@ class OrderController extends Controller
                   $order->save();
                 $request->session()->flash('success', 'Order approved successfully.');
                 }else{
+
+                  $order=Order::find($id);  
+                  $order->status=2;
+                  $order->save();
+                  if ($order->pay_type==2) {
+                  
+                   Stripe::setApiKey(env('STRIPE_KEY'));
+                   $val = round($order->total * 100);
+                    $refund = \Stripe\Refund::create([
+                        'charge' => $order->stripe_charge_id,
+                    ]);
+
+                  }
                     $request->session()->flash('success', 'Order cancel successfully.');
                 }
              DB::commit();
@@ -60,6 +74,7 @@ class OrderController extends Controller
             return back();
             
             } catch (Exception $e) {
+                return $e;
               DB::rollback();
              $request->session()->flash('error', 'Something wrong!');
              return back(); 

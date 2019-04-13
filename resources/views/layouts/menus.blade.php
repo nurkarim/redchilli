@@ -14,7 +14,7 @@
 
                                 <div class="col-sm-8">
                                     <p class="item-title" style="padding: 0px!important;">{{ $item->name }}</p>
-                                    <p class="item-desc" style="padding: 0px!important;">{{ $item->details }}</p>
+                                    <p class="item-desc" style="padding: 0px!important;margin-top: -7px;font-size: 12px">{{ $item->details }}</p>
                                 </div>
                                 <div class="col-sm-4 cart-action">
                                     <p>£{{ $item->price }} 
@@ -36,7 +36,7 @@
 
                                 <div class="col-sm-8">
                                     <p class="item-title" style="padding: 0px!important;">{{ $catItem->name }}</p>
-                                    <p class="item-desc" style="padding: 0px!important;">{{ $catItem->details }}</p>
+                                    <p class="item-desc" style="padding: 0px!important;margin-top: -7px;font-size: 12px">{{ $catItem->details }}</p>
                                 </div>
                                 <div class="col-sm-4 cart-action">
                                     <p>£{{ $catItem->price }} 

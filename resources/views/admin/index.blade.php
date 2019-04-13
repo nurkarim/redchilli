@@ -43,55 +43,13 @@
                         
                         
 						<li class="list-inline-item dropdown notif">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" onclick="activeAll()">
                                 <i class="fa fa-fw fa-bell-o"></i><span class="notif-bullet"></span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg">
+                            <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-lg"  id="loadContent">
 								<!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5><small><span class="label label-danger pull-xs-right">5</span>Allerts</small></h5>
-                                </div>
-								
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-faded">
-                                 
-                                    </div>
-                                    <p class="notify-details">
-                                        <b>John Doe</b>
-                                        <span>User registration</span>
-                                        <small class="text-muted">3 minutes ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-faded">
-                                       
-                                    </div>
-                                    <p class="notify-details">
-                                        <b>Michael Cox</b>
-                                        <span>Task 2 completed</span>
-                                        <small class="text-muted">12 minutes ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-faded">
-                                        
-                                    </div>
-                                    <p class="notify-details">
-                                        <b>Michelle Dolores</b>
-                                        <span>New job completed</span>
-                                        <small class="text-muted">35 minutes ago</small>
-                                    </p>
-                                </a>
-
-                                <!-- All-->
-                                <a href="#" class="dropdown-item notify-item notify-all">
-                                    View All Allerts
-                                </a>
+                              
+					
 
                             </div>
                         </li>
@@ -107,15 +65,10 @@
                                 </div>
 
                                 <!-- item-->
-                                <a href="pro-profile.html" class="dropdown-item notify-item">
+                                <a href="#" class="dropdown-item notify-item">
                                     <i class="fa fa-user"></i> <span>Profile</span>
                                 </a>
 
-                                <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
-                                    <i class="fa fa-power-off"></i> <span>Logout</span>
-                                </a>
-								
 							
                             </div>
                         </li>
@@ -176,7 +129,33 @@
 
 @include('admin._partials.footer')
 @include('admin._partials.modal')
+<script type="text/javascript">
+      $(document).ready(function () {
+        $("#loadContent").load("{{route('sync-data')}}");
+        setInterval(function () {
+            $("#loadContent").load("{{route('sync-data')}}");
+        },10000);
+    })
 
+        function activeAll() {
+                $.ajax({
+                type: 'GET',
+                async:false,
+                url: '{{ route('activeNotify') }}',
+                dataType: "json",
+                success: function(data) {
+                if (data.status==true) {
+                  
+                  
+                }else{
+                    
+                    }
+                },
+                error: function(data) {
+                }
+              });
+            }
+</script>
 </body>
 
 </html>

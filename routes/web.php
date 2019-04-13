@@ -14,6 +14,9 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
     Route::get('settings/app', 'SettingController@appSetting')->name('settings.app');
     Route::post('settings/app', 'SettingController@appSettingSave')->name('settings.appSave');
 
+    Route::get('sync-data', 'AdminController@getNotification')->name('sync-data');
+    Route::get('activeNotify', 'AdminController@activeNotify')->name('activeNotify');
+
 });
 Auth::routes();
 Route::get('/', 'HomeController@index');

@@ -13,6 +13,7 @@ use App\MenusItem;
 use App\Order;
 use App\OrderCart;
 use App\Discount;
+use App\Notification;
 use DB;
 use Cart;
 use Toastr;
@@ -126,13 +127,11 @@ class HomeController extends Controller
     public function confirmOrder(Request $request)
     {
 
-
-
         try {
              DB::beginTransaction();
-         Validator::make($request->all(), [
+             Validator::make($request->all(), [
                     'payment_type' => 'required|numeric',
-                ]);
+            ]);
         if (Cart::count() < 0) {
            return $request->session()->flash('error', 'Sorry!Items not found.');
         }
@@ -193,7 +192,16 @@ class HomeController extends Controller
                         ]);
                      }
                 Cart::destroy();
+
+                Notification::create([
+                    'title'=>"New order",
+                    'order_id'=>$order->id,
+                    'customer'=>Session::get('full_name'),
+                    'note'=>"New order submited.Order amount ".$grandTotal." Order No ORD-".$order->id,
+                    'status'=>0,
+                ]);
             }
+
         }else{
 
                 if (empty($request->card_number)||empty($request->exp_date)||empty($request->exp_year)||empty($request->card_cvv)) {
@@ -266,6 +274,14 @@ class HomeController extends Controller
                         ]);
                      }
                       Cart::destroy();
+
+                       Notification::create([
+                    'title'=>"New order",
+                    'order_id'=>$order->id,
+                    'customer'=>Session::get('full_name'),
+                    'note'=>"New order submited.Order amount ".$grandTotal." Order No ORD-".$order->id,
+                    'status'=>0,
+                ]);
                     }
                 }
             }
