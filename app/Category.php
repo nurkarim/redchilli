@@ -23,7 +23,8 @@ class Category extends Model
     {
        return $this->hasMany(Product::class,'category_id','id')->where('food_menus_id','!=',0)->groupBy('food_menus_id');
     }
-
+    
+    
     public function items()
     {
        return $this->hasMany(Product::class,'category_id','id');
