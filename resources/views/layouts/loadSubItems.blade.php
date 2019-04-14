@@ -35,7 +35,12 @@
 
     <button type="submit" class="btn btn-primary dp0 btn-md ripple" onclick="addCart()">Add To basket</button>
 </div>
-
+<?php
+$item="";
+if (@$product->foodMenu->name!=null) {
+  $item=@$product->foodMenu->name; 
+}
+?>
 <script>
 var checked = [];
 var nameSItem = [];
@@ -46,6 +51,6 @@ function addCart() {
     nameSItem.push(namea[1]);
 });
 
-addToCart('{{$product->id}}','{{$product->name}}','{{$product->price}}','{{$product->foodMenu->name}}',nameSItem);
+addToCart('{{$product->id}}','{{$product->name}}','{{$product->price}}','{{$item}}',nameSItem);
 }
 </script>

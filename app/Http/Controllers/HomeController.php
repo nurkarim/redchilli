@@ -82,13 +82,27 @@ class HomeController extends Controller
        
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
+         $subtotal=0;
+         foreach(Cart::content() as $row) {
+            $subtotal+=$row->price;
+        }
+        if ($subtotal < 10) {
+            Toastr::error('Place order must be above £10.00', 'Error', ["positionClass" => "toast-top-right"]);
+           
+            return redirect('/');
+        }
         return view('layouts.checkout');
     }
 
     public function storeCheckout(CheckoutRequest $request)
     {
+          $discount=0;
+           $subtotal=0;
+        foreach(Cart::content() as $row) {
+            $subtotal+=$row->price;
+        }
         
         Session::put('full_name',$request->full_name);
         Session::put('email',$request->email);
@@ -97,11 +111,7 @@ class HomeController extends Controller
         Session::put('delivery_times',$request->delivery_times);
         Session::put('notes',$request->notes);
         Session::put('coupon_code',$request->coupon_code);
-          $discount=0;
-           $subtotal=0;
-        foreach(Cart::content() as $row) {
-            $subtotal+=$row->price;
-        }
+        
         if (!empty($request->coupon_code)) {
             $getDisCode=Discount::where('code',$request->coupon_code)->first();
             if ($getDisCode) {

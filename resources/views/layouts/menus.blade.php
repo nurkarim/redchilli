@@ -42,7 +42,12 @@
                                 <div class="col-sm-4 cart-action">
                                     <p>£{{ $catItem->price }} 
                                      
+                                   @if(count($catItem->subItems)>0)
+                                      <a href="javascript:void(0)"  data-toggle="modal" data-target="#modal" onclick="loadModal('{{route('product.subItems',$catItem->id)}}')"><i class="fa fa-plus"></i></a>
+                                      @else
                                       <a href="javascript:void(0)"  onclick="addToCart('{{ $catItem->id }}','{{ $catItem->name }}','{{ $catItem->price }}','','')"><i class="fa fa-plus"></i></a>
+
+                                      @endif
 
                                     </p> 
                                 </div>
@@ -64,6 +69,9 @@
 							 $(".subAmt").each(function() {
 							  add += Number($(this).val());
 							       });
+               if (Number(add) >= Number(10)) {
+                $('#plcdrder').show();
+               }
 							 $('#sub_total').html(add);           
 							} 
 						function grandTotal() {
@@ -73,10 +81,10 @@
 							       });
 							 $('#grand_total').html(add);           
 							}
+
 					function addToCart(id,name,price,item,subitem) {
             
-          
-					    var qty=$("#qty_"+id).val();
+					   var qty=$("#qty_"+id).val();
 						 var pdtid=$('#pid_'+id).val();
 					
 						if (Number(pdtid)==Number(id)) {

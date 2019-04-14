@@ -99,7 +99,8 @@
 
                             <div class="row">
                                 <div class="col-md-12 order-footer">
-                                    <a href="{{route('checkouts.show')}}"><button class="btn btn-danger btn-sm btn-block">Place Order</button></a>
+                                    <a style="display: none" id="plcdrder"  href="{{route('checkouts.show')}}"><button class=" btn btn-danger btn-sm btn-block">Place Order</button></a>
+                                    <span style="text-align: center;font-size: 12px">Place order must be above £10.00</span>
                                 </div>
                             </div>
                           </div>
