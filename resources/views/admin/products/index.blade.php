@@ -49,7 +49,13 @@
 															<td>{{ $product->name }}</td>
 															<td>£{{ $product->price }}</td>
 															<td>{{ $product->details }}</td>
-															<td><a href="{{route('products.edit',$product->id)}}" class="btn btn-primary btn-xs" >Edit</a></td>
+															<td>
+	<form method="post" action="{{ route('products.delete') }}">
+					@csrf
+					<input type="hidden" name="id" value="{{ $product->id }}">
+					<button class="btn btn-danger btn-xs" type="submit" onclick="return confirm('Are you sure you want to delete?');">Delete</button> | <a href="{{route('products.edit',$product->id)}}" class="btn btn-primary btn-xs" >Edit</a>
+				</form>	
+			</td>
 														</tr>
 														@endforeach
 														

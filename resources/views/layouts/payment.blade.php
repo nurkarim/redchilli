@@ -68,7 +68,7 @@
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success btn-md">Confirm Order</button> | <a href="{{ route('checkouts.show') }}" class="btn btn-primary btn-md">Back Checkout</a>
                                     </div>
-
+ <input type="hidden" class="amt" name="charge" id="charge" value="2">
                                 </form>
                             </div>
                         </div>
@@ -105,24 +105,26 @@
                                     <div class="col-sm-4">
                                         £<span id="sub_total">0</span>
                                     </div>
-        @if(Session::get('discount')!=" ")
+        @if(Session::get('discount')==null)
+        <input type="hidden" id="discount" name="discount" value="0">
+        @else
                                     <div class="col-sm-8">
                                         Discount
                                     </div>
                                     <div class="col-sm-4">
-                                        £<span id="sub_total">{{ number_format(Session::get('discount'),2) }}</span>
-                                        <input type="hidden" id="discount" name="discount" value="{{ number_format(Session::get('discount'),2) }}">
+                                        £<span id="sub_total">{{ Session::get('discount') }}</span>
+                                        <input type="hidden" id="discount" name="discount" value="{{ Session::get('discount') }}">
                                     </div>
-                                    @else
-                                    <input type="hidden" id="discount" name="discount" value="0">
+                            
+                                  
                                     @endif
 
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-8 dcharge">
                                         Delivery fee
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-4 dcharge">
                                         £2.00
-                                        <input type="hidden" class="amt" value="2">
+                                       
                                     </div>
                                 </div>
                                 <div class="row ordertotal">
@@ -174,7 +176,7 @@
         $(".subAmt").each(function() {
             add += Number($(this).val());
         });
-        $('#sub_total').html(add);
+        $('#sub_total').html(parseFloat(add).toFixed(2));
     }
 
     function grandTotal() {
@@ -182,8 +184,8 @@
         $(".amt").each(function() {
             add += Number($(this).val());
         });
-        $('#grand_total').html(add);
-        $('.grandTotal').val(add);
+        $('#grand_total').html(parseFloat(add).toFixed(2));
+        $('.grandTotal').val(parseFloat(add).toFixed(2));
         discount();
     }
     subTotal();

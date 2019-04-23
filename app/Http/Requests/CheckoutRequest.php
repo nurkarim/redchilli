@@ -27,7 +27,6 @@ class CheckoutRequest extends FormRequest
             'full_name'=>'required',
             'email'=>'required',
             'phone'=>'required',
-            'delivery_address'=>'required',
             'delivery_times'=>'required',
         ];
     }

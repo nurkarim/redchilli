@@ -14,12 +14,14 @@ use App\Order;
 use App\OrderCart;
 use App\Discount;
 use App\Notification;
+use App\Mail\OrderNotification;
 use DB;
 use Cart;
 use Toastr;
 use Session;
 use Carbon\Carbon;
 use Stripe\Stripe;
+
 class HomeController extends Controller
 {
     
@@ -126,6 +128,8 @@ class HomeController extends Controller
 
             }
         }
+
+        
         return redirect()->route('payments.show');
     }
 
@@ -142,8 +146,9 @@ class HomeController extends Controller
              Validator::make($request->all(), [
                     'payment_type' => 'required|numeric',
             ]);
-        if (Cart::count() < 0) {
-           return $request->session()->flash('error', 'Sorry!Items not found.');
+        if (Cart::count() == 0) {
+             Toastr::error('Sorry!Items not found.', 'Empty Cart', ["positionClass" => "toast-top-right"]);
+            return redirect('/');
         }
         $subtotal=0;
         foreach(Cart::content() as $row) {
@@ -168,7 +173,7 @@ class HomeController extends Controller
 
       
         $subtotalWithDis=$subtotal-$discount;
-        $grandTotal=2+$subtotalWithDis;
+        $grandTotal=$request->charge+$subtotalWithDis;
         $stripFee=2.9;
 
         if ($request->payment_type==1) {
@@ -183,7 +188,7 @@ class HomeController extends Controller
                         'discount_code'=>Session::get('coupon_code'),
                         'total_product'=>Cart::count(),
                         'sub_total'=>$subtotal,
-                        'tax'=>2,
+                        'tax'=>$request->charge,
                         'discount'=>$discount,
                         'stripe_fee'=>0,
                         'total'=>$grandTotal,
@@ -210,6 +215,32 @@ class HomeController extends Controller
                     'note'=>"New order submited.Order amount ".$grandTotal." Order No ORD-".$order->id,
                     'status'=>0,
                 ]);
+
+                   Session::put('coupon_code',null);
+                   Session::put('discount',null);
+                   if ($order->tax==0) {
+                       $type="Delivery";
+                   }else{
+                       $type="Collection";
+                   }
+            $data=[
+                'id'=>$order->id,
+                'name'=>$order->customer_name,
+                'email'=>$order->email,
+                'phone'=>$order->contact,
+                'delivery'=>$order->delivery_address,
+                'deliveryTimes'=>$order->delivery_times,
+                'subtotal'=>$order->sub_total,
+                'discount'=>$order->discount,
+                'fee'=>$order->tax,
+                'grand_total'=>$order->total,
+                'carts'=>$order->carts,
+                'type'=>$type,
+            ];
+            Mail::to($order->email)->send(new OrderNotification($data));
+                  DB::commit();
+               
+            return view('layouts.success',compact('order'));
             }
 
         }else{
@@ -265,7 +296,7 @@ class HomeController extends Controller
                         'discount_code'=>Session::get('coupon_code'),
                         'total_product'=>Cart::count(),
                         'sub_total'=>$subtotal,
-                        'tax'=>2,
+                        'tax'=>$request->charge,
                         'discount'=>$discount,
                         'stripe_fee'=>$withFee,
                         'total'=>$grandTotal,
@@ -293,14 +324,39 @@ class HomeController extends Controller
                     'status'=>0,
                 ]);
                     }
+
+            Session::put('coupon_code',null);
+            Session::put('discount',null);
+
+             if ($order->tax==0) {
+                       $type="Delivery";
+                   }else{
+                       $type="Collection";
+                   }
+            $data=[
+                'id'=>$order->id,
+                'name'=>$order->customer_name,
+                'email'=>$order->email,
+                'phone'=>$order->contact,
+                'delivery'=>$order->delivery_address,
+                'deliveryTimes'=>$order->delivery_times,
+                'subtotal'=>$order->sub_total,
+                'discount'=>$order->discount,
+                'fee'=>$order->tax,
+                'grand_total'=>$order->total,
+                'carts'=>$order->carts,
+                'type'=>$type,
+            ];
+            Mail::to($order->email)->send(new OrderNotification($data));
+
+            DB::commit();
+           
+            return view('layouts.success',compact('order'));
                 }
             }
-            Session::put('coupon_code'," ");
-            Session::put('discount'," ");
-            DB::commit();
-            Toastr::success('New Order Successfully', 'Order Success', ["positionClass" => "toast-top-right"]);
-            return redirect('/');
-            
+         
+            Toastr::error('Something was wrong.', 'Order Error', ["positionClass" => "toast-top-right"]);
+            return back();
             } catch (Exception $e) {
               DB::rollback();
              Toastr::error($e->getMessage(), 'Error', ["positionClass" => "toast-top-right"]);

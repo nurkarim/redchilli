@@ -9,12 +9,13 @@
     <meta name="keywords" content="Indian Restaurant in Northallerton Uk, red chilli Northallerton, spicy food in Northallerton, online food delivery in Northallerton">
     <title>Red Chilli Indian Restaurant in Northallerton Uk, Fully Licensed Indian Restaurant, red chilli, Northallerton Uk</title>
    @include('layouts.header')
+   
   </head>
   <body>
 
   <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top main-nav">
-        <p> <i class="fa fa-phone"></i> <a href="tell:01609775552">01609775552</a> &nbsp;&nbsp;&nbsp;<i class="fa fa-envelope"></i> redchillinorthallertonuk@gmail.com
+        <p> <i class="fa fa-phone"></i> <a href="tel:01609775552">01609775552</a> &nbsp;&nbsp;&nbsp;<i class="fa fa-envelope"></i> redchillinorthallertonuk@gmail.com
         </p>
         <div class="container">
         <a class="navbar-brand" href="https://redchillinorthallerton.co.uk"><img src="{{ url('public/layouts') }}/img/logo.png"></a>
@@ -32,13 +33,14 @@
                 <a class="dropdown-item  active " href="index.html">Image</a>
               </div>
             </li> -->
-            <li class="nav-item "><a href="/" class="nav-link">Home</a></li>
-            <li class="nav-item "><a href="#order" class="nav-link">Menu</a></li>
-            <li class="nav-item "><a href="#offer" class="nav-link">Offers</a></li>
-            <li class="nav-item "><a href="#about" class="nav-link">About</a></li>
-            <li class="nav-item "><a href="#slider" class="nav-link">Gallery</a></li>
-            <li class="nav-item "><a href="#footer" class="nav-link">Contact</a></li>
-           <li class="nav-item "><a href="#ordernow" class="nav-link case">Order Now</a></li>
+            <li class="nav-item "><a href="https://redchillinorthallerton.co.uk" class="nav-link">Home</a></li>
+            <li class="nav-item "><a href="https://redchillinorthallerton.co.uk/#order" class="nav-link">Menu</a></li>
+            <li class="nav-item "><a href="https://redchillinorthallerton.co.uk/#offer" class="nav-link">Offers</a></li>
+            <li class="nav-item "><a href="https://redchillinorthallerton.co.uk/#about" class="nav-link">About</a></li>
+            <li class="nav-item "><a href="https://redchillinorthallerton.co.uk/#slider" class="nav-link">Gallery</a></li>
+            <li class="nav-item "><a href="https://redchillinorthallerton.co.uk/#footer" class="nav-link">Contact</a></li>
+           <li class="nav-item "><a href="https://redchillinorthallerton.co.uk#ordernow" class="nav-link case">Order Now</a></li>
+           <li class="nav-item "><a href="https://redchillinorthallerton.co.uk/admin" class="nav-link">Login</a></li>
             
           </ul>
         </div>
@@ -58,7 +60,7 @@
           <div class="col-md-4 contact">
             <h4>GET IN TOUCH</h4>
             <a href="mailto:redchillinorthallertonuk@gmail.com" target="_top"><i class="fa fa-envelope"></i> redchillinorthallertonuk@gmail.com</a>
-            <p><i class="fa fa-phone"></i>01609775552 <br>
+            <p><i class="fa fa-phone"></i><a href="tel:01609775552">01609775552</a> <br>
             <i class="fa fa-location-arrow"></i>297 High Street Northallerton, North Yorkshire DL7 8DW, UK</p>
           </div>
           <div class="col-md-4">

@@ -4,6 +4,8 @@ Route::group(['prefix' => 'admin','middleware'=>'auth'], function() {
 	 Route::get('/', 'AdminController@index')->name('admin');
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController');
+    Route::post('products/delete', 'ProductController@delete')->name('products.delete');
+
     Route::resource('foodMenus', 'FoodMenuController');
     Route::resource('orders', 'OrderController');
     Route::get('orders/print/{id}', 'OrderController@printPaper')->name('orders.print');

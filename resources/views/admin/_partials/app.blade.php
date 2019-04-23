@@ -22,27 +22,27 @@
 									<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 											<div class="card-box noradius noborder bg-primary">
 													<i class="fa fa-file-text-o float-right text-white"></i>
-													<h6 class="text-white text-uppercase m-b-20">Active Orders</h6>
+													<h6 class="text-white text-uppercase m-b-20">Completed Orders</h6>
 													<h1 class="m-b-20 text-white counter">{{ $active }}</h1>
-													<span class="text-white">{{ $active }} Active Orders</span>
+													<span class="text-white">{{ $active }} Completed Orders</span>
 											</div>
 									</div>
 
 									<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 											<div class="card-box noradius noborder bg-default">
 													<i class="fa fa-file-text-o float-right text-white"></i>
-													<h6 class="text-white text-uppercase m-b-20">New Orders</h6>
+													<h6 class="text-white text-uppercase m-b-20">Pending Orders</h6>
 													<h1 class="m-b-20 text-white counter">{{ $inactive }} </h1>
-													<span class="text-white">{{ $inactive }}  New Orders</span>
+													<span class="text-white">{{ $inactive }}  Pending Orders</span>
 											</div>
 									</div>
 
 										<div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
 											<div class="card-box noradius noborder bg-danger">
 													<i class="fa fa-file-text-o float-right text-white"></i>
-													<h6 class="text-white text-uppercase m-b-20">Cancel Orders</h6>
+													<h6 class="text-white text-uppercase m-b-20">Canceled Orders</h6>
 													<h1 class="m-b-20 text-white counter">{{ $cancelOrder }}</h1>
-													<span class="text-white">{{ $cancelOrder }} Cancel Orders</span>
+													<span class="text-white">{{ $cancelOrder }} Canceled Orders</span>
 											</div>
 									</div>
 
@@ -66,11 +66,12 @@
 												
 											<div class="card-body">
 												
-												<table id="example1" class="table table-bordered table-responsive-xl table-hover display">
+												<table id="example" class="table table-bordered table-responsive-xl table-hover display">
 													<thead>
 														<tr>
-															<th>SL</th>
-															<th>Order No</th>
+															
+															<th>ORD-</th>
+															<th>Delivery Type</th>
 															<th>Date</th>
 															<th>Customer</th>
 															<th>Phone</th>
@@ -88,8 +89,9 @@
 														?>
 														@foreach($orders as $order)
 														<tr>
-															<td>{{ $i++ }}</td>
-														<td>	<a target="_blank" href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
+															
+														  <td>	<a target="_blank" href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
+														<td>@if($order->tax==0) Collection @else Delivery @endif</td>
 															<td>{{ $order->date }}</td>
 															<td>{{ $order->customer_name }}</td>
 															<td>{{ $order->contact }}</td>
@@ -112,4 +114,14 @@
 
 
             </div>
+            @section('js')
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#example').DataTable( {
+        "order": [[ 2, "desc" ]]
+    } );
+} );
+</script>
+
+@endsection
 @endsection

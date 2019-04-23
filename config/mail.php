@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'mail.redchillinorthallerton.co.uk'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'support@redchillinorthallerton.co.uk'),
+        'name' => env('MAIL_FROM_NAME', 'Red Chilli Northallerton'),
     ],
 
     /*
@@ -111,6 +111,13 @@ return [
     | of the emails. Or, you may simply stick with the Laravel defaults!
     |
     */
+ 'stream' => [
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true,
+        ],
+    ],
 
     'markdown' => [
         'theme' => 'default',

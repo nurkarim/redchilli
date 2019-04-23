@@ -1,10 +1,63 @@
 @extends('layouts.app')
 @section('content')
-<section id="intro" data-parallax="scroll" data-image-src="{{ url('public/layouts') }}/img/bgheader.jpg">
+<style type="text/css">
+     [type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    background: #fff;
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: #F87DA9;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+   </style>
+<section id="intro" data-parallax="scroll" data-image-src="{{ url('public/layouts') }}/img/bgheader2.jpg">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="intro-content">
+                    <img src="{{ url('public/layouts') }}/img/logo.png">
                     <h1>Quality Indian food cooked by experienced chefs</h1>
                     <h2>Fully Licensed Indian Restaurant</h2>
                     <i class="fa fa-clock-o" style="background-color: rgba(30, 116, 222, 0.5);" data-toggle="tooltip" data-placement="top" title="From 5PM to 11PM"></i> <i class="fa fa-phone" style="background-color:rgba(233, 47, 43, 0.5);" data-toggle="tooltip" data-placement="top" title="01609 775552"></i> <i class="fa fa-map-marker" style="background-color: rgba(97, 218, 0, 0.5); padding: 20px 23px 20px 23px;" data-toggle="tooltip" data-placement="top" title="297 High Street Northallerton, North Yorkshire DL7 8DW"></i>
@@ -23,7 +76,7 @@
         <div class="container">
             <div class="order-area">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 d-none d-sm-block d-sm-none d-md-block">
                         <div class="card">
                           <div class="card-header">
                             <i class="fa fa-cutlery"></i> Categories
@@ -36,7 +89,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-xs-12">
                         <div class="card">
                           <div class="card-header">
                             <i class="fa fa-th-list"></i> Menu | Red Chilli Northallerton
@@ -47,7 +100,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="ordercart">
+                        <div class="col-md-12">
+                                      <input type="radio" id="test1" name="radio-group" checked>
+                                      <label for="test1" style="font-weight: bold;">Delivery <br> <span class="estimateTimeLabel" style="font-weight: 400">45 – 60 mins</span></label>
+                                     
+                                       <input type="radio" id="test2" name="radio-group">
+                                      <label for="test2" style="font-weight: bold;">Collection <br> <span class="estimateTimeLabel" style="font-weight: 400">20 mins</span></label>
+                                     
+                          </div>
                         <div class="card text-white bg-dark">
                           <div class="card-header">
                             <i class="fa fa-shopping-cart"></i> Order Details
@@ -74,18 +135,20 @@
                             <!-- item-end -->
 
                             <div class="row order-details">
+
+                              
                                 <div class="col-sm-8">
-                                    Subtotal 
+                                    Subtotal
                                 </div>
                                 <div class="col-sm-4">
                                     £<span id="sub_total">0</span>
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-8 dcharge">
                                     Delivery fee
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 dcharge">
                                     £2.00
-                                    <input type="hidden" class="amt" value="2">
+                                    <input type="hidden" class="amt" id="charge" value="2">
                                 </div>
                             </div>
                             <div class="row ordertotal">
@@ -109,6 +172,12 @@
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<section id="mcart" class="d-block d-sm-none d-none d-sm-block d-md-none">
+  <div class="mcratbody">
+    <a  id="plcdrder"  href="#ordercart"><button class=" btn btn-danger btn-sm btn-block">Place Order (£<span class="grand_total">0</span>)</button></a>
     </div>
 </section>
 
@@ -262,7 +331,15 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src="{{ url('public/layouts') }}/img/offer1.jpg" style="height: 370px;" alt="">
+                    <div class="card bg-offer" >
+                      <div class="card-header offer-header">Free Rice or Naan Bread</div>
+                      <div class="card-body offer-body">
+                        <img src="https://www.redchillinorthallerton.co.uk/public/layouts/img/logo.png">
+                        <p class="offer-footer">Free Rice or Naan Bread with every main course</p>
+                        <h5 class="card-titleo">When you order a starter and Main Course</h5>
+                        <p class="offer-book">To book table please call us on 016097755552</p>
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -307,4 +384,5 @@
         
     </section>
     </a>
+
    @endsection

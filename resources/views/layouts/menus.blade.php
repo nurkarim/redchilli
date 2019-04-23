@@ -1,23 +1,43 @@
+         <?php
+         $itemArray=array();
+         ?>
            @foreach($categories as $value)
            <div class="card-body">
 
-                            <!-- item category -->
-                            <h5 class="card-title" id="cat_{{ $value->id }}">{{ $value->name }}</h5>
-                            <p class="categoryDescription">{{ $value->note }}</p>
+                <div id="accordion">
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#call{{ $value->id }}" aria-expanded="true" aria-controls="call{{ $value->id }}">
+                          <h5 class="card-title" id="cat_{{ $value->id }}">{{ $value->name }}</h5>
+                        </button>
+                      </h5>
+                    </div>
+
+                    <div id="call{{$value->id}}" class="collapse 
+                      @if($loop->first)
+                      show
+                      @endif
+                      " aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body">
+                        <p class="categoryDescription">{{ $value->note }}</p>
+
                               <!-- menu item -->
                               @if(count($value->foodMenus)>0)
                               @foreach($value->foodMenus as $food_Menu)
-                              <h4  style="font-weight: 500;font-size: 15px;padding-top: 5px;">{{ $food_Menu->foodMenu->name }}</h4>
-                              <span style="font-size: 13px">{{ $food_Menu->foodMenu->note }}</span>
+                              <h4 class="menu-title">{{ $food_Menu->foodMenu->name }}</h4>
+                              <span>{{ $food_Menu->foodMenu->note }}</span>
                               @if(count($food_Menu->foodMenu->items) > 0)
                               @foreach($food_Menu->foodMenu->items as $item)
+                              <?php 
+                                $itemArray[]=$item->id;
+                              ?>
                             <div class="row item">
-
-                                <div class="col-sm-8">
-                                    <p class="item-title" style="padding: 0px!important;">{{ $item->name }}</p>
-                                    <p class="item-desc" style="padding: 0px!important;margin-top: -7px;font-size: 13px">{{ $item->details }}</p>
+                                <div class="col-sm-8 col-8">
+                                    <p class="item-title" >{{ $item->name }}</p>
+                                    <p class="item-desc">{{ $item->details }}</p>
                                 </div>
-                                <div class="col-sm-4 cart-action">
+                                <div class="col-sm-4 col-4 cart-action">
                                     <p>£{{ $item->price }} 
                                       @if(count($item->subItems))
                                       <a href="javascript:void(0)"  data-toggle="modal" data-target="#modal" onclick="loadModal('{{route('product.subItems',$item->id)}}')"><i class="fa fa-plus"></i></a>
@@ -32,14 +52,19 @@
                             @endif
                             @endforeach
                             @endif
+
+
+                            
                               @foreach($value->items as $catItem)
+                              @if(in_array($catItem->id, $itemArray))
+                              @else
                                   <div class="row item">
 
-                                <div class="col-sm-8">
+                                <div class="col-sm-8 col-8">
                                     <p class="item-title" style="padding: 0px!important;">{{ $catItem->name }}</p>
                                     <p class="item-desc" style="padding: 0px!important;margin-top: -7px;font-size: 13px">{{ $catItem->details }}</p>
                                 </div>
-                                <div class="col-sm-4 cart-action">
+                                <div class="col-sm-4 col-4 cart-action">
                                     <p>£{{ $catItem->price }} 
                                      
                                    @if(count($catItem->subItems)>0)
@@ -52,9 +77,14 @@
                                     </p> 
                                 </div>
                             </div>
+                            @endif
                                @endforeach 
 
-                           
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
 
                             <!-- menu item-end -->
 
@@ -72,14 +102,15 @@
                if (Number(add) >= Number(10)) {
                 $('#plcdrder').show();
                }
-               $('#sub_total').html(add);           
+               $('#sub_total').html(parseFloat(add).toFixed(2));           
               } 
             function grandTotal() {
                 var add = 0;
                $(".amt").each(function() {
                 add += Number($(this).val());
                      });
-               $('#grand_total').html(add);           
+               $('#grand_total').html(parseFloat(add).toFixed(2));           
+               $('.grand_total').html(parseFloat(add).toFixed(2));           
               }
 
           function addToCart(id,name,price,item,subitem) {

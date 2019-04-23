@@ -99,4 +99,20 @@ class ProductController extends Controller
              return back(); 
         }
    }
+
+   public function delete(Request $request)
+    {
+      try {
+            DB::beginTransaction();
+            $save=Product::find($request->id);
+            $save->delete();
+            DB::commit();
+            $request->session()->flash('success', "Delete successfully");
+            return back();
+            } catch (Exception $e) {
+            DB::rollback();
+            $request->session()->flash('error', 'Something wrong!');
+            return back(); 
+        }
+    }
 }

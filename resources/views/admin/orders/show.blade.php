@@ -113,6 +113,12 @@
 																				
 																				<td class="no-line text-center"><strong>Shipping</strong></td>
 																				<td class="no-line text-right">£{{ $order->tax }}</td>
+																			</tr>	
+																			<tr>
+																				<td class="no-line"></td>
+																				
+																				<td class="no-line text-center"><strong>Discount</strong></td>
+																				<td class="no-line text-right">£{{ $order->discount }}</td>
 																			</tr>
 																			<tr>
 																				<td class="no-line"></td>

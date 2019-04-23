@@ -25,7 +25,7 @@
         	<div class="c-menupicker__options-header"><b>Select option:</b></div>
         	@foreach($subItem as $subvalue)
          <div class="col-md-12">
-          <div style="box-sizing: border-box;"> <label class="sub-items" for="subitems_{{ $subvalue->id }}"><input type="checkbox" name="sitems[]" value="{{ $subvalue->id }}_{{ $subvalue->name }}" id="subitems_{{ $subvalue->id }}">{{ $subvalue->name }}</label></div>
+          <div style="box-sizing: border-box;"> <label class="sub-items" for="subitems_{{ $subvalue->id }}"><input type="checkbox" name="sitems[]" value="{{ $subvalue->id }}_{{ $subvalue->name }}" id="subitems_{{ $subvalue->id }}">&nbsp;{{ $subvalue->name }}</label></div>
           </div>  
           @endforeach
         </div>

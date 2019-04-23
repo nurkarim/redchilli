@@ -18,11 +18,11 @@ body{background: #000;}
 
 #intro{min-height: 600px; z-index: 2; }
 .intro-content{padding:130px 0px 0px 0px; z-index: 1;}
-.intro-content h1{color: #fff; text-shadow: 0px 0px 5px red;}
-.intro-content h2{color: #fff; text-shadow: 0px 0px 5px red;}
+.intro-content h1{color: #fff; text-shadow: 0px 0px 5px red; font-size:35px;}
+.intro-content h2{color: #fff; text-shadow: 0px 0px 5px red; font-size:25px;}
 .intro-content i{ font-size: 35px;     border-radius: 100%; color: #fff; box-shadow: 0 0 0 4px rgba(45, 126, 216, 0.2); margin:10px 15px; padding: 20px;     line-height: 30px; }
 .tooltip-inner{font-size: 20px;}
-#intro button{margin:20px 0px 20px 0px;}
+#intro button{}
 
 .coupon{  color: #fff; font-size: 22px; font-weight: 600; padding: 10px; text-shadow: 0px 0px 5px red;}
 
@@ -39,9 +39,24 @@ body{background: #000;}
 .item-title{font-weight: 800; font-size: 15px; padding-left:6px;}
 .item-desc{padding-left:6px;}
 .cart-action i{color:#ac1f1f;  margin:0px 0px 0px 10px;}
+.menu-title{
+    color: #bc2222;
+    font-size: 21px;
+    padding: 5px 0px 5px 3px;
+    border-bottom: 1px solid #bc2222;
+}
 
 #checkout{}
 .checkout-area{ z-index: 99;  border:1px solid #e4e4e4; margin-top: 120px; background: #f9f9f9; border-radius: 10px; padding: 15px;}
+
+#mcart{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 200;
+    text-align: center;
+    background: #fff;
+}
 
 .cartitem{border-bottom: 1px solid #292a2b; padding: 2px 0px 5px 0px;}
 .cartitem-title{padding: 0px 5px 0px 5px;}

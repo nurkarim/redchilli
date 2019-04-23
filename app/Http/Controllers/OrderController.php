@@ -11,19 +11,19 @@ class OrderController extends Controller
 {
     public function index()
     {
-    	$orders=Order::where('status',1)->get();
+    	$orders=Order::where('status',1)->orderBy('id','DESC')->get();
     	return view('admin.orders.index',compact('orders'));
     }
 
     public function pendingOrder()
     {
-    	$orders=Order::where('status',0)->get();
+    	$orders=Order::where('status',0)->orderBy('id','DESC')->get();
     	return view('admin.orders.pendingOrder',compact('orders'));
     } 
 
     public function cancelOrder()
     {
-    	$orders=Order::where('status',2)->get();
+    	$orders=Order::where('status',2)->orderBy('id','DESC')->get();
     	return view('admin.orders.cancelOrder',compact('orders'));
     }
 

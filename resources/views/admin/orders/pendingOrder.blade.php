@@ -23,11 +23,12 @@
 											</div>
 												
 											<div class="card-body">
-											<table id="example1" class="table table-bordered table-responsive-xl table-hover display">
+											<table id="example" class="table table-bordered table-responsive-xl table-hover display">
 													<thead>
 														<tr style="height:15px!important;">
 															
 															<th>ID No</th>
+															<th>Delivery Type</th>
 															<th>Date</th>
 															<th>Delivery Times</th>
 															<th>Customer</th>
@@ -45,6 +46,7 @@
 														@foreach($orders as $order)
 														<tr>
 															<td><a target="_balnk" href="{{route('orders.show',$order->id)}}">ORD-{{ $order->id }}</a></td>
+															<td>@if($order->tax==0) Collection @else Delivery @endif</td>
 															<td>{{ $order->date }}</td>
 															<td>{{ $order->delivery_times }}</td>
 															<td>{{ $order->customer_name }}</td>
@@ -65,5 +67,14 @@
 							</div>
 
 
+@section('js')
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#example').DataTable( {
+        "order": [[ 2, "desc" ]]
+    } );
+} );
+</script>
 
+@endsection
 @endsection
