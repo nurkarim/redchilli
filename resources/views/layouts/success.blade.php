@@ -30,5 +30,9 @@
     </div>
 </section>
 
-
+@section('js')
+<script type="text/javascript">
+  sessionStorage.setItem("type", 1);
+</script>
+ @endsection
  @endsection

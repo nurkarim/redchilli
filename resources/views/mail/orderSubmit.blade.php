@@ -13,13 +13,13 @@ body{background-color:#1F1F1F}
 <table width="830" height="577" border="0" cellpadding="0" cellspacing="0" align="center" bgcolor="#666666">
   <tr>
     <td width="820" height="577">
-	<table width="622" height="453" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="margin-top:20px; ">
+	<table width="622" height="453" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="margin-top:20px;margin-bottom: 20px; ">
   <tr>
     <td height="96" align="center" bgcolor="#000000"><img src="https://redchillinorthallerton.co.uk/public/layouts/img/logo.png" alt="Redchilli" width="293" height="83" /></td>
   </tr>
   <tr>
     <td height="323" align="center">
-      <table width="571" height="379" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#CCCCCC" style="border-left: none;border-right: none;">
+      <table width="571" height="379" border="1" align="center" cellpadding="0" cellspacing="0" bordercolor="#CCCCCC" style="border-left: none;border-right: none;border-top: none;">
       <tr style="border-style: none;">
         <td height="47" colspan="3" style="border-style: none;"><span style='color: #353535;font-size: 18px;font-family: Georgia, "Times New Roman", Times, serif;'>Your order has been received and is now being process.Your order details are shown below for your reference </span></td>
         </tr>

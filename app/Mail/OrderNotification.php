@@ -20,6 +20,6 @@ class OrderNotification extends Mailable
     
     public function build()
     {
-        return $this->subject('Order submit success')->view('mail.orderSubmit',compact('data'));
+        return $this->subject('Order Submit Successfully')->view('mail.orderSubmit',compact('data'));
     }
 }
